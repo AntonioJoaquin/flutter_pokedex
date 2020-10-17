@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
@@ -11,7 +12,8 @@ class ApiBaseHelper {
     var responseJson;
 
     try {
-      final response = await http
+      final response = await http.get(_baseUrl + url);
+      responseJson = json.decode(response.body.toString());
     } on SocketException {
       print('Connection error');
     }
