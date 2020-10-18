@@ -53,27 +53,38 @@ class HomePage extends StatelessWidget {
       }
     });
 
-    return ListView.builder(
+    return GridView.builder(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3, 
+        childAspectRatio: .7,
+        mainAxisSpacing: 1.0,
+        crossAxisSpacing: 1.0),
       controller: scrollController,
       itemCount: state.pokemons.length,
       itemBuilder: (BuildContext context, int index) {
-        return _listTile(state.pokemons[index]);
+        return _listTile(context, state.pokemons[index]);
       },
     );
   }
 
-  Widget _listTile(Results pokemon) {
+  Widget _listTile(BuildContext context, Results pokemon) {
     final chunks = pokemon.url.split('/');
     var id = chunks[6];
 
-    return ListTile(
-        leading: Icon(Icons.arrow_right),
-        title: Text(pokemon.name),
-        trailing: Image(
+    return GridTile(
+      child: Container(
+        width: double.infinity,
+        height: double.infinity,
+        child: Image(
             image: NetworkImage(
                 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png'
             )
-        )
+        ),
+      ),
+      footer: GridTileBar(
+        backgroundColor:Theme.of(context).primaryColor,
+        title: Text(pokemon.name),
+      ),
     );
   }
 }
