@@ -5,10 +5,13 @@ import 'package:flutter_pokedex/src/bloc/pokemons/PokemonsState.dart';
 import 'package:flutter_pokedex/src/repository/PokemonRepository.dart';
 
 class PokemonsBloc extends Bloc<PokemonsEvent, PokemonsState> {
+
   PokemonRepository pokemonRepository;
+
 
   PokemonsBloc({@required this.pokemonRepository})
       : assert(pokemonRepository != null);
+
 
   @override
   PokemonsState get initialState => WithoutPokemonsState();
@@ -25,4 +28,5 @@ class PokemonsBloc extends Bloc<PokemonsEvent, PokemonsState> {
       }
     }
   }
+  
 }
